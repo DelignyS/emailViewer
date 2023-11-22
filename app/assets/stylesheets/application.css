@@ -27,7 +27,7 @@
 }
 
 .animated-background {
-  animation: animatedBackground 0.9s linear infinite;
+  animation: animatedBackground 9s linear infinite;
 }
 footer {
   position: fixed;
@@ -53,5 +53,5 @@ footer {
   overflow: auto;
   border-left: 12px solid transparent;
   box-sizing: border-box;
-  animation: animatedBackground 1s linear infinite;
+  animation: animatedBackground 14s linear infinite;
 }

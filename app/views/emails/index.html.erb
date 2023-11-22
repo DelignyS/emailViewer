@@ -2,13 +2,16 @@
 
 <h1>Emails</h1>
 
-<%= render 'form', email: @email %>
+<%= turbo_frame_tag 'new_email' do %>
+  <%= render 'form', email: @email %>
+<% end %>
 
 <div class="row">
   <div class="col-6">
     <%= render @emails %>
   </div>
-  <div class="col-6" id="email-content">
-    <!-- Le contenu de l'email sera chargé ici -->
+  <div class="col-6">
+    <%= turbo_frame_tag 'email' do %>
+      <!-- L'email sera affiché ici -->
+    <% end %>
   </div>
-</div>

@@ -1,12 +1,7 @@
-<div id="<%= dom_id email %>" class ="tutu">
-  <p>
-    <strong>Object:</strong>
-    <%= email.object %>
-  </p>
-
-  <p>
-    <strong>Body:</strong>
-    <%= email.body %>
-  </p>
-
+<!-- app/views/emails/_email.html.erb -->
+<div id="<%= dom_id email %>">
+  <h2><%= email.object %></h2>
+  <p><%= email.body %></p>
+  <%= link_to 'Supprimer', email, method: :delete, data: { turbo_action: 'replace', turbo_frame: dom_id(email) }, remote: true, class: 'btn btn-danger' %>
+  <button>Marquer comme non-lu</button>
 </div>

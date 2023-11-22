@@ -26,11 +26,11 @@ class EmailsController < ApplicationController
 
     respond_to do |format|
       if @email.save
-        format.html { redirect_to email_url(@email), notice: "Email was successfully created." }
-        format.json { render :show, status: :created, location: @email }
+        format.turbo_stream { render turbo_stream: turbo_stream.replace('email', partial: 'emails/email', locals: { email: @email }) }
+        format.html { redirect_to emails_path }
       else
-        format.html { render :new, status: :unprocessable_entity }
-        format.json { render json: @email.errors, status: :unprocessable_entity }
+        format.turbo_stream { render turbo_stream: turbo_stream.replace('new_email', partial: 'form', locals: { email: @email }) }
+        format.html { render :new }
       end
     end
   end
@@ -48,23 +48,19 @@ class EmailsController < ApplicationController
     end
   end
 
-  # DELETE /emails/1 or /emails/1.json
   def destroy
-    @email.destroy!
-
+    @email.destroy
     respond_to do |format|
+      format.turbo_stream { render turbo_stream: turbo_stream.remove(dom_id(@email)) }
       format.html { redirect_to emails_url, notice: "Email was successfully destroyed." }
-      format.json { head :no_content }
     end
   end
-
   private
-    # Use callbacks to share common setup or constraints between actions.
+   
     def set_email
       @email = Email.find(params[:id])
     end
 
-    # Only allow a list of trusted parameters through.
     def email_params
       params.require(:email).permit(:object, :body)
     end
